@@ -11,7 +11,6 @@
   <IconUrl DefaultValue="https://joda35.github.io/whos-next-wheel/assets/icon-32.png"/>
   <HighResolutionIconUrl DefaultValue="https://joda35.github.io/whos-next-wheel/assets/icon-64.png"/>
   <SupportUrl DefaultValue="https://joda35.github.io/whos-next-wheel/index.html"/>
-  <AppDomains/>
   <Hosts>
     <Host Name="Presentation"/>
   </Hosts>
