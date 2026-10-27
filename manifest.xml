@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:type="ContentApp">
+  <Id>5b7c2a9e-3f41-4d8a-9c6e-8e2f1d0a7b31</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>Jonas</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="Who’s Next Wheel"/>
+  <Description DefaultValue="Random name picker wheel that runs directly on your slide."/>
+  <IconUrl DefaultValue="https://joda35.github.io/whos-next-wheel/assets/icon-32.png"/>
+  <HighResolutionIconUrl DefaultValue="https://joda35.github.io/whos-next-wheel/assets/icon-64.png"/>
+  <SupportUrl DefaultValue="https://joda35.github.io/whos-next-wheel/index.html"/>
+  <AppDomains/>
+  <Hosts>
+    <Host Name="Presentation"/>
+  </Hosts>
+  <DefaultSettings>
+    <SourceLocation DefaultValue="https://joda35.github.io/whos-next-wheel/index.html"/>
+    <RequestedWidth>800</RequestedWidth>
+    <RequestedHeight>450</RequestedHeight>
+  </DefaultSettings>
+  <Permissions>ReadWriteDocument</Permissions>
+  <AllowSnapshot>true</AllowSnapshot>
+</OfficeApp>
