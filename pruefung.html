@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prüfung</title>
+<script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+<link rel="stylesheet" href="wheel.css">
+</head>
+<body>
+<div id="app">
+  <div id="stage">
+    <button class="alt small" id="toggle">List</button>
+    <h1>Who’s next?</h1>
+    <div id="wheelWrap"><canvas id="wheel"></canvas><div id="pointer"></div></div>
+    <div id="result">&nbsp;</div>
+    <div class="btns">
+      <button id="spin">Spin!</button>
+      <button class="alt" id="reset">Everyone back in</button>
+    </div>
+  </div>
+  <aside id="side">
+    <h2>Names (<span id="count">0</span>)</h2>
+    <p>Untick absent students. Space or Enter spins the wheel.</p>
+    <div id="list"></div>
+    <div class="opt">
+      <label><input type="checkbox" id="removeDrawn" checked> Remove picked names</label>
+      <button class="alt small" id="editBtn">Edit names</button>
+    </div>
+    <div id="editBox">
+      <p>One name per line. Saved only in this presentation.</p>
+      <textarea id="names" spellcheck="false"></textarea>
+      <div class="btns"><button class="small" id="save">Save</button><button class="alt small" id="cancel">Cancel</button></div>
+    </div>
+  </aside>
+</div>
+<script>window.WHEEL_EXCLUDED = [
+  "c8ddcd0869ecfad47b64b972ef626eb0becec8c7a08538663bf138da4a269958",
+  "dcf14d97dfb93cdda26d8ddb882768af5dea8b2c96f8aa0d7c77e20244ce7b4e",
+  "75b41b6905ae9c584103276ab1f95efb8eecadc2ebe54cd8a0813259beb1db24",
+  "b95dbc21656bedb67efb9ccc2b62a7d19ac3316efe44ffb808fbc6b56ce2abd9",
+  "0bb9ed7966ae6f8573c1817f6724d4b5b10ec466e6215a70d663784e06303406"
+];</script>
+<script src="wheel.js"></script>
+</body>
+</html>

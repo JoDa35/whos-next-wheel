@@ -1,0 +1,33 @@
+  :root { --bg:#3b2a1e; --paper:#f4ecd8; --navy:#1f2a44; --red:#8b1a1a; --line:#8b6f47; --grey:#555; }
+  * { box-sizing:border-box; }
+  html, body { margin:0; height:100%; background:var(--bg); color:var(--navy);
+    font-family:Garamond, "EB Garamond", Georgia, serif; overflow:hidden; }
+  #app { display:flex; gap:2vmin; height:100%; padding:2vmin; }
+  #stage { flex:1; position:relative; min-width:0; background:var(--paper); border:3px solid var(--line); border-radius:12px;
+    display:flex; flex-direction:column; align-items:center; padding:1.5vmin; }
+  h1 { margin:0; font-size:clamp(16px, 6vmin, 34px); }
+  #wheelWrap { position:relative; flex:1; width:100%; min-height:0; display:flex; align-items:center; justify-content:center; }
+  #pointer { position:absolute; top:50%; left:calc(50% + var(--r) - 14px); transform:translateY(-50%);
+    width:0; height:0; border-top:calc(var(--r) * .09) solid transparent; border-bottom:calc(var(--r) * .09) solid transparent;
+    border-right:calc(var(--r) * .17) solid var(--red); filter:drop-shadow(0 2px 2px rgba(0,0,0,.35)); }
+  #result { font-size:clamp(18px, 8vmin, 44px); font-weight:bold; color:var(--red); min-height:1.25em; line-height:1.25; }
+  .btns { display:flex; gap:12px; }
+  button { font-family:inherit; font-size:clamp(13px, 4vmin, 22px); padding:.4em 1.1em; border-radius:8px;
+    border:2px solid var(--line); background:var(--navy); color:#fff; cursor:pointer; }
+  button.alt { background:var(--paper); color:var(--navy); }
+  button.small { font-size:14px; padding:4px 10px; }
+  button:disabled { opacity:.5; cursor:default; }
+  #toggle { position:absolute; top:10px; right:12px; }
+  #side { width:250px; background:var(--paper); border:3px solid var(--line); border-radius:12px; padding:12px;
+    display:flex; flex-direction:column; gap:8px; min-height:0; }
+  #side.hidden { display:none; }
+  #side h2 { font-size:20px; margin:0; }
+  #side p { font-size:14px; color:var(--grey); margin:0; }
+  #list { flex:1; overflow:auto; min-height:0; }
+  label { display:flex; align-items:center; gap:8px; font-size:17px; padding:1px 0; cursor:pointer; }
+  #list label.out { color:var(--grey); text-decoration:line-through; }
+  .opt { border-top:1px solid var(--line); padding-top:8px; display:flex; flex-direction:column; gap:8px; }
+  #editBox { display:none; flex-direction:column; gap:6px; }
+  #editBox.open { display:flex; }
+  textarea { width:100%; height:160px; font:15px/1.3 inherit; font-family:inherit; border:1px solid var(--line);
+    border-radius:6px; padding:6px; background:#fffdf6; resize:vertical; }
