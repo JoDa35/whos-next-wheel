@@ -10,18 +10,37 @@
   const canvas = $("wheel"), ctx = canvas.getContext("2d");
 
   // Names live in the add-in's document settings (saved inside the .pptx), never in this hosted code.
+  // Each wheel on a slide is its own add-in instance with its own settings, so the instances of one
+  // presentation also share their state through localStorage, keyed by the presentation's file path.
+  let shareKey = STORE;
+  function readShared() {
+    try { return JSON.parse(localStorage.getItem(shareKey)); } catch (e) { return null; }
+  }
   function load() {
-    let s = null;
-    if (inOffice) s = Office.context.document.settings.get("zufallsrad");
-    else { try { s = JSON.parse(localStorage.getItem(STORE)); } catch (e) {} }
+    let s = readShared();
+    if (!s && inOffice) s = Office.context.document.settings.get("zufallsrad");
     if (s) state = Object.assign(structuredClone(DEFAULT), s);
   }
   function save() {
+    try { localStorage.setItem(shareKey, JSON.stringify(state)); } catch (e) {}
     if (inOffice) {
       Office.context.document.settings.set("zufallsrad", state);
       Office.context.document.settings.saveAsync(() => {});
-    } else { try { localStorage.setItem(STORE, JSON.stringify(state)); } catch (e) {} }
+    }
   }
+  // Pick up changes made by a wheel on another slide.
+  function sync() {
+    const s = readShared();
+    if (!s || spinning || JSON.stringify(s) === JSON.stringify(state)) return;
+    const namesChanged = JSON.stringify(s.names) !== JSON.stringify(state.names);
+    state = Object.assign(structuredClone(DEFAULT), s);
+    $("result").innerHTML = "&nbsp;";
+    render();
+    if (namesChanged) updateExcluded();
+  }
+  window.addEventListener("storage", e => { if (e.key === shareKey) sync(); });
+  window.addEventListener("focus", sync);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) sync(); });
 
   const active = () => state.names.filter(n => !state.inactive.includes(n));
   function rand() {
@@ -157,6 +176,10 @@
   window.addEventListener("resize", size);
 
   function start() { load(); render(); updateExcluded(); }
-  if (window.Office && Office.onReady) Office.onReady(info => { inOffice = !!info.host; start(); });
+  if (window.Office && Office.onReady) Office.onReady(info => {
+    inOffice = !!info.host;
+    if (inOffice) shareKey = STORE + "|" + (Office.context.document.url || "unsaved");
+    start();
+  });
   else start();
 })();
