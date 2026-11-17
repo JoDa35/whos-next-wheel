@@ -120,8 +120,8 @@
     const seg = 2 * Math.PI / names.length, TAU = 2 * Math.PI;
     const landing = pick * seg + (0.15 + rand() * 0.7) * seg;
     const start = angle;
-    const total = (5 + Math.floor(rand() * 3)) * TAU + ((-landing - start) % TAU + TAU) % TAU;
-    const dur = 4200 + rand() * 1200, t0 = performance.now();
+    const total = (3 + Math.floor(rand() * 2)) * TAU + ((-landing - start) % TAU + TAU) % TAU;
+    const dur = 2100 + rand() * 600, t0 = performance.now();
     (function step(t) {
       const p = Math.min(1, (t - t0) / dur);
       angle = start + total * (1 - Math.pow(1 - p, 4)); draw();
