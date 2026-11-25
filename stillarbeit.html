@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quiet Work</title>
+  <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+  <style>
+    html, body { margin: 0; height: 100%; overflow: hidden; background: #f4efe3; }
+    iframe { display: block; width: 100%; height: 100%; border: 0; }
+  </style>
+</head>
+<body>
+  <!--
+    Every "Quiet Work" add-in on every slide shows the same Shy Safari page.
+    All of them share one browser storage, and Shy Safari saves which animals
+    are present after each arrival or departure and restores them on load, so
+    the animals carry over from one quiet-work slide to the next.
+    A hidden copy (a slide that is no longer shown) is blanked so it cannot keep
+    listening and overwrite the saved animals with an old state.
+  -->
+  <iframe id="safari" allow="microphone; autoplay; fullscreen"></iframe>
+  <script>
+    var SRC = "https://www.shysafari.com/";
+    var frame = document.getElementById("safari");
+
+    function show() { if (frame.getAttribute("src") !== SRC) frame.setAttribute("src", SRC); }
+    function hide() { frame.setAttribute("src", "about:blank"); }
+
+    document.addEventListener("visibilitychange", function () {
+      document.visibilityState === "hidden" ? hide() : show();
+    });
+
+    function askForMicrophone() {
+      try {
+        if (Office.devicePermission && Office.DevicePermissionType) {
+          Office.devicePermission.requestPermissionsAsync(
+            [Office.DevicePermissionType.microphone], function () { show(); });
+          return;
+        }
+      } catch (e) {}
+      show();
+    }
+
+    if (window.Office && Office.onReady) {
+      Office.onReady(askForMicrophone);
+    } else {
+      show();
+    }
+  </script>
+</body>
+</html>
